@@ -1,0 +1,89 @@
+/* @theme zero-alpha */
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";
+
+:root {
+  /* Brand tokens */
+  --bg: #0a0d12;
+  --ink: #0f131a;
+  --panel: #121823;
+  --ghost: #1a2230;
+  --text: #e9eef5;
+  --muted: #aab6c5;
+  --accent: #22e7ff;      /* cyan */
+  --accent-2: #ff2fa6;    /* ALPHA pink */
+  --radius: 22px;
+}
+
+/********************
+ * Base slide styles *
+ ********************/
+section {
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 1200px at 20% -10%, #15202f 0%, var(--bg) 55%);
+  padding: 48px 64px;
+}
+
+h1, h2 { letter-spacing: -0.02em; margin: 0 0 8px 0; }
+h1 { font-weight: 800; font-size: 64px; }
+h2 { font-weight: 800; font-size: 44px; }
+p  { color: var(--muted); font-size: 28px; line-height: 1.4; }
+
+/****************
+ * Utility chips *
+ ****************/
+.kicker { font-weight: 700; color: var(--accent-2); text-transform: uppercase; letter-spacing: .18em; font-size: 18px; }
+.tag    { display: inline-block; background: var(--accent-2); color: #fff; font-weight: 800; font-size: 12px; padding: 6px 10px; border-radius: 999px; letter-spacing: .08em; }
+.muted  { color: var(--muted); }
+
+/* Card container for content focus */
+.card {
+  background: linear-gradient(180deg, var(--panel), var(--ghost));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  padding: 48px;
+}
+
+/* Brand bar */
+.brand {
+  position: absolute; top: 24px; left: 32px; display: flex; align-items: center; gap: 12px;
+}
+.brand img { height: 32px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
+
+/* Bullets */
+ul.bullets { list-style: none; padding: 0; margin: 16px 0 0; }
+ul.bullets li {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px; padding: 14px 18px; font-size: 28px; margin: 10px 0;
+}
+ul.bullets li::marker { content: none; }
+ul.bullets li::before {
+  content: ""; display: inline-block; width: .9em; height: .9em; margin-right: .6em; border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, white 0 20%, var(--accent) 21% 100%);
+  box-shadow: 0 0 0 6px rgba(34,231,255,.35), 0 0 30px var(--accent);
+  vertical-align: -2px;
+}
+
+/* Layout helpers via _class */
+.title { display: grid; grid-template-columns: 1fr; align-content: center; }
+.split  { display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center; }
+.center { display: grid; place-items: center; text-align: center; }
+
+/* Image treatments */
+.frame {
+  background: #0e131b center/cover no-repeat; border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08); min-height: 380px;
+}
+
+/* Section intro big type */
+.section h1 { font-size: 88px; }
+
+/* Questions slide */
+.questions h1 { font-size: 96px; }
+
+/* Footer (optional) */
+footer {
+  color: var(--muted); position: absolute; bottom: 18px; right: 28px; font-size: 18px;
+}
