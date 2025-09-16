@@ -2,16 +2,16 @@
 @import "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";
 
 :root {
-  /* Brand tokens */
-  --bg: #0a0d12;
-  --ink: #0f131a;
-  --panel: #121823;
-  --ghost: #1a2230;
-  --text: #e9eef5;
-  --muted: #aab6c5;
-  --accent: #22e7ff;      /* cyan */
-  --accent-2: #ff2fa6;    /* ALPHA pink */
-  --radius: 22px;
+--bg: #f9fafc;
+--ink: #111418;
+--panel: #ffffff;
+--ghost: #f0f3f8;
+--text: #1d2127;
+--muted: #5f6c7a;
+--accent: #22c1dd; /* cyan */
+--accent-2: #d81b77; /* ALPHA pink */
+--ring: rgba(34,193,221,.35);
+--radius: 22px;
 }
 
 /********************
