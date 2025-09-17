@@ -18,6 +18,20 @@
   --radius: 22px;
 }
 
+.title {
+  font-size: 5em;
+  font-weight: 800;
+  background: linear-gradient(
+    90deg, #ec4899, #8b5cf6, #ec4899
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 3s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
 /********************
  * Base slide styles *
  ********************/
@@ -27,6 +41,7 @@ section {
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.35;
   padding: 48px 64px;
+  position: relative
 }
 
 section {
@@ -88,6 +103,15 @@ p  { color: var(--muted); font-size: 1.15em; }
   padding: 48px;
 }
 
+.legacy-query-flow {
+  width: 500px;
+}
+
+.synced-query-flow {
+  width: 800px;
+  margin-top: 64px;
+}
+
 /* Visual frame for screenshots or art */
 .frame {
   background: #e9eef6 center/cover no-repeat;
@@ -129,7 +153,6 @@ li::before {
 /****************
  * Layout helpers *
  ****************/
-.title { display: grid; grid-template-columns: 1fr; align-content: center; }
 .split  { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2em; align-items: center; }
 .center { display: grid; place-items: center; text-align: center; }
 .section-intro, .questions { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
@@ -145,7 +168,10 @@ footer { color: var(--muted); position: absolute; bottom: 18px; right: 28px; fon
  * Mascot & logo size constraints *
  *********************************/
 /* Generic mascot class for explicit usage */
-.mascot { width: clamp(260px, 26vw, 380px); height: auto; object-fit: contain; }
+.mascot { 
+  width: clamp(260px, 26vw, 380px); height: auto; object-fit: contain;
+  display: none;
+}
 
 /* Logo: cap size wherever it appears */
 img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
@@ -226,6 +252,7 @@ img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
 }
 
 .mascot-sm {
+  display: none;
   height: 120px;
 }
 
@@ -243,7 +270,6 @@ img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
 h1 {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
-  font-size: 2.5rem;
   background: linear-gradient(
     90deg,
     #A5F3FC,
@@ -267,6 +293,7 @@ h1 {
 }
 
 .shimmer-mask {
+  display: none;
   /* size to your image (or set fixed width/height) */
   width: 377px;    /* example: the PNG’s width */
   height: 365px;   /* example: the PNG’s height */

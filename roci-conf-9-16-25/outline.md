@@ -5,25 +5,85 @@ paginate: true
 theme: "zero-alpha2"
 ---
 
-# Zero
+<span class="title">Zero</span>
 
-## Synced Queries & Custom Mutators
+# Synced Queries & Custom Mutators
 
 <div class="shimmer-mask center"></div>
 <!-- <img src="./mascot-jumping.png" class="mascot center" /> -->
 
 ---
 
+# Queries Today
+
+<div class="two-col">
+  <div class="col">
+
+```ts
+// Query
+useQuery(z.query.todo.where(
+  'listId',
+  id
+));
+```
+  </div>
+
+  <div class="col">
+  
+```json
+// AST
+{ "table": "todo",
+  "where": {
+    "type": "simple", "op": "=",
+    "left": { "type": "column", "name": "listId" },
+    "right": { "type": "literal", "value": "1" },
+  }, "orderBy": [["id", "asc"]] }
+  ```
+
+  </div>
+</div>
+
+<img src="legacy-query-flow.png" class="legacy-query-flow center" />
+
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
+---
+
+# Problems?
+
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
+---
+
+# Problems?
+
+- Client could craft arbitrary ASTs or QODs (.related().related().related().related...)
+- Zero-Cache must authenticate and authorize users
+- Client and server queries implementations have to match
+- No room for your code on the read path
+
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
+---
+
 # Synced Query
 
-- Like today's queries
 - `[name, args]` tuple sent to server instead of an AST
 - Advantages
   - Locks down the server
   - Custom code on read path
   - Custom authorization
+  - Divergent implementations on client and server
 - Disadvantages
   - More complex deployment
+
+---
+
+# Synced Query
+
+<img src="synced-query-flow.png" class="synced-query-flow center" />
+
+<img src="./mascot-jumping.png" class="mascot-sm bottom-left" />
 
 ---
 
@@ -32,10 +92,8 @@ theme: "zero-alpha2"
 <div class="two-col">
   <div class="col">
 
+Query is defined once. Used on both the client and server. Closest DX to current queries.
 ```typescript
-// Defined once.
-// Used on both the client and server.
-// Closest DX to current queries.
 const todoList = syncedQuery(
   'todoList',
   ({context, id}: {context: Session, id: string}) =>
@@ -47,6 +105,8 @@ const todoList = syncedQuery(
         q => q.where('userId', context.userId)
       )
 );
+
+useQuery(todoList);
 ```
   </div>
 </div>
@@ -56,6 +116,8 @@ const todoList = syncedQuery(
 ---
 
 # Synced Query (Divergent 1)
+
+Only check permissions on the server. Prevents needing to sync permission related data.
 
 <div class="two-col">
   <div class="col">
@@ -98,6 +160,8 @@ const todoList = syncedQuery(
 ---
 
 # Synced Query (Divergent 2)
+
+Custom code on read. Using 3rd party auth[n/z] tools for permissions.
 
 <div class="two-col">
   <div class="col">
@@ -152,6 +216,8 @@ const todoList = syncedQuery(
 
 - Perf, over-sync, whatev
 
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
 ---
 
 # Reviving Ad-Hoc Queries
@@ -174,9 +240,13 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 
 <div class="note">⚠️ Notional example</div>
 
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
 ---
 
 # Reviving RLS
+
+<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
 
 ---
 
@@ -185,17 +255,27 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 - Parallel to Synced Queries
 - Semantic mutations
 - `[name, args]` sent to server instead of C~~R~~UD
-- Advantages
-  - Locked down server
-  - Custom code on write path
-  - Custom authorization
+- Similar benefits but on write
+
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
+---
+
+# Custom Mutator Flow
+
+(crud flow, custom flow)
+
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
 
 ---
 
 
-# Custom Mutator
+# Custom Mutator + Synced Queries
+# = Cookie/Any Auth[n/z]
 
 todo: code example
+
+<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
 
 ---
 
