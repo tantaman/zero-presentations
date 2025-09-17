@@ -211,10 +211,12 @@ h1 {
   font-weight: 800;
   font-size: 2.5rem; /* adjust as needed */
 
-  background: linear-gradient(90deg, #ec4899, #8b5cf6); /* pink → purple */
+  background: linear-gradient(90deg, #ec4899, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  
+
   background-clip: text; /* for Firefox */
   color: transparent;    /* fallback */
 }
