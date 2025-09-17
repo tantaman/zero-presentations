@@ -1,4 +1,4 @@
-/* @theme zero-alpha */
+/* @theme zero-alpha2 */
 @import "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap";
 
 /* ZERO Alpha Marp Theme — Light Mode (Full CSS)
@@ -22,14 +22,16 @@
  * Base slide styles *
  ********************/
 section {
-  background: radial-gradient(1200px 1200px at 20% -10%, #ffffff 0%, var(--bg) 80%) fixed;
+  background: radial-gradient(1200px 1200px at 20% -10%, #ffffffff 0%, var(--bg) 80%) fixed;
   color: var(--text);
   font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.35;
   padding: 48px 64px;
 }
 
-h1, h2 { margin: 0 0 8px 0; letter-spacing: -0.02em; color: var(--ink); }
+h1 { color: var(--accent-2); }
+h2 { color: var(--ink); }
+h1, h2 { margin: 0 0 8px 0; letter-spacing: -0.02em;  }
 h1 { font-weight: 800; font-size: 2.8em; }
 h2 { font-weight: 700; font-size: 2em; }
 p  { color: var(--muted); font-size: 1.15em; }
@@ -44,7 +46,7 @@ p  { color: var(--muted); font-size: 1.15em; }
 /********************
  * Card & frame UI   *
  ********************/
-.card {
+.card, pre {
   background: linear-gradient(180deg, var(--panel), var(--ghost));
   border: 1px solid rgba(0,0,0,.06);
   border-radius: var(--radius);
@@ -70,9 +72,9 @@ p  { color: var(--muted); font-size: 1.15em; }
 /*************************
  * Markdown list styling  *
  *************************/
-ul, ul ul { list-style: none; padding-left: 0; margin: 1em 0; }
+ul { list-style: none; padding-left: 0; margin: 1em 0; }
 
-ul li {
+li {
   background: rgba(0,0,0,.03);
   border: 1px solid rgba(0,0,0,.08);
   border-radius: 16px;
@@ -81,7 +83,7 @@ ul li {
   font-size: 1.2em;
 }
 
-ul li::before {
+li::before {
   content: "";
   display: inline-block;
   width: .7em; height: .7em; margin-right: .6em; border-radius: 50%;
@@ -110,10 +112,6 @@ footer { color: var(--muted); position: absolute; bottom: 18px; right: 28px; fon
  *********************************/
 /* Generic mascot class for explicit usage */
 .mascot { width: clamp(260px, 26vw, 380px); height: auto; object-fit: contain; }
-/* If you use alt text containing "Mascot" (as in your deck) */
-img[alt*="Mascot" i] { width: clamp(260px, 26vw, 380px); height: auto; object-fit: contain; }
-/* Ensure absolutely-positioned mascots don't overflow */
-img[alt*="Mascot" i].right, img.mascot.right { position: absolute; right: 0; bottom: -10px; }
 
 /* Logo: cap size wherever it appears */
 img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
@@ -125,4 +123,104 @@ img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
   section { padding: 32px; }
   .split { grid-template-columns: 1fr; }
   .card { padding: 28px; }
+}
+
+.hljs-keyword {
+  color: blue;
+}
+
+.hljs-string {
+  color: green;
+}
+
+.hljs-number {
+  color: red;
+}
+.hljs-attribute {
+  color: orange;
+}
+.hljs-title {
+  color: purple;
+}
+.hljs-comment {
+  color: gray;
+}
+.hljs-built_in {
+  color: teal;
+}
+.hljs-literal {
+  color: brown;
+}
+.hljs-symbol {
+  color: magenta;
+}
+.hljs-bullet {
+  color: olive;
+}
+.hljs-meta {
+  color: navy;
+}
+.hljs-deletion {
+  color: maroon;
+}
+.hljs-addition {
+  color: lime;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: bold;
+}
+
+.two-col {
+  display: flex;
+  gap: 24px;
+}
+.col {
+  flex: 1;
+}
+
+.note {
+  background: var(--ghost);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.08);
+  font-size: 1em;
+  color: var(--muted);
+  display: inline-block;
+}
+
+.mascot-sm {
+  height: 120px;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 64px;
+  left: 64px;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  font-family: 'Inter', sans-serif; /* or Poppins / Plus Jakarta Sans */
+  font-weight: 800;
+  font-size: 2.5rem; /* adjust as needed */
+
+  background: linear-gradient(90deg, #ec4899, #8b5cf6); /* pink → purple */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  background-clip: text; /* for Firefox */
+  color: transparent;    /* fallback */
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

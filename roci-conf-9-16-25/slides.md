@@ -18,10 +18,12 @@ theme: "zero-alpha"
   
   # Queries & Mutators
   
-  <p class="muted">Code on the read and write path</p>
+  <p class="muted">Code on the path</p>
+  
+  <img src="mascot-running.png" alt="Mascot" style="position:absolute; right:0; bottom:-10px; width: 360px" />
 </div>
 
-<img src="mascot-running.png" alt="Mascot" style="position:absolute; right:0; bottom:-10px; width: 360px" />
+
 
 ---
 
