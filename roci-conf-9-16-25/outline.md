@@ -170,7 +170,7 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 
 # Custom Mutators
 
-- Formalized version of CRUD mutators
+- 
 
 ---
 

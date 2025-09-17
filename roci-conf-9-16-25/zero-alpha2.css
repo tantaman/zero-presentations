@@ -207,18 +207,22 @@ img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
 }
 
 h1 {
-  font-family: 'Inter', sans-serif; /* or Poppins / Plus Jakarta Sans */
+  font-family: 'Inter', sans-serif;
   font-weight: 800;
-  font-size: 2.5rem; /* adjust as needed */
-
-  background: linear-gradient(90deg, #ec4899, #8b5cf6, #ec4899);
-  background-size: 200% 200%;
-  animation: gradient-shift 5s ease infinite;
+  font-size: 2.5rem;
+  background: linear-gradient(
+    90deg,
+    #A5F3FC,
+    #22D3EE,
+    #22D3EE,
+    #A5F3FC
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 12s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
-  background-clip: text; /* for Firefox */
-  color: transparent;    /* fallback */
+  background-clip: text;
+  color: transparent;
 }
 
 @keyframes gradient-shift {
