@@ -29,6 +29,40 @@ section {
   padding: 48px 64px;
 }
 
+section {
+  background: #ffffff; /* clean white base */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Abstract soft blobs */
+section::before,
+section::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+section::before {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -150px;
+  background: radial-gradient(circle, #22D3EE 0%, transparent 70%);
+}
+
+section::after {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -200px;
+  background: radial-gradient(circle, #A5F3FC 0%, transparent 70%);
+}
+
+
 h1 { color: var(--accent-2); }
 h2 { color: var(--ink); }
 h1, h2 { margin: 0 0 8px 0; letter-spacing: -0.02em;  }
@@ -214,11 +248,12 @@ h1 {
     90deg,
     #A5F3FC,
     #22D3EE,
+    #0F172A,
     #22D3EE,
     #A5F3FC
   );
   background-size: 300% 300%;
-  animation: gradient-shift 12s ease infinite;
+  animation: gradient-shift 16s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -229,4 +264,51 @@ h1 {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+.shimmer-mask {
+  /* size to your image (or set fixed width/height) */
+  width: 377px;    /* example: the PNG’s width */
+  height: 365px;   /* example: the PNG’s height */
+
+  position: relative;
+  background: url('./mascot-running.png') no-repeat center / contain; /* the actual image */
+  isolation: isolate; /* keeps blending contained */
+}
+
+/* moving highlight that is clipped to the image shape */
+.shimmer-mask::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* luminous sweep */
+  background: linear-gradient(
+    75deg,
+    rgba(165,243,252,0) 20%,     /* #A5F3FC transparent */
+    rgba(34,211,238,0.70) 45%,   /* #22D3EE bright center */
+    rgba(165,243,252,0) 70%
+  );
+  background-size: 200% 100%;
+  transform: translateX(-120%) rotate(0.001deg);
+  animation: shimmer 2.4s ease-in-out infinite;
+  mix-blend-mode: screen;
+
+  /* 🔒 Clip to the PNG’s alpha channel */
+  -webkit-mask-image: url('./mascot-running.png');
+          mask-image: url('./mascot-running.png');
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+}
+
+@keyframes shimmer {
+  to { transform: translateX(120%) rotate(0.001deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-mask::after { animation: none; }
 }

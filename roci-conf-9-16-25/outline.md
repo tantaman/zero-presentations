@@ -9,7 +9,8 @@ theme: "zero-alpha2"
 
 ## Synced Queries & Custom Mutators
 
-<img src="./mascot-jumping.png" class="mascot center" />
+<div class="shimmer-mask center"></div>
+<!-- <img src="./mascot-jumping.png" class="mascot center" /> -->
 
 ---
 
@@ -32,8 +33,9 @@ theme: "zero-alpha2"
   <div class="col">
 
 ```typescript
-// Loaded on both the client and server.
 // Defined once.
+// Used on both the client and server.
+// Closest DX to current queries.
 const todoList = syncedQuery(
   'todoList',
   ({context, id}: {context: Session, id: string}) =>
@@ -146,6 +148,12 @@ const todoList = syncedQuery(
 
 ---
 
+# Synced Queries (Divergent 3)
+
+- Perf, over-sync, whatev
+
+---
+
 # Reviving Ad-Hoc Queries
 
 Synced queries, a more powerful primitive than today's queries.
@@ -168,9 +176,19 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 
 ---
 
+# Reviving RLS
+
+---
+
 # Custom Mutators
 
-- 
+- Parallel to Synced Queries
+- Semantic mutations
+- `[name, args]` sent to server instead of C~~R~~UD
+- Advantages
+  - Locked down server
+  - Custom code on write path
+  - Custom authorization
 
 ---
 
