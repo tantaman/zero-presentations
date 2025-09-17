@@ -278,6 +278,10 @@ h1 {
 
 /* moving highlight that is clipped to the image shape */
 .shimmer-mask::after {
+  --color1: 165, 243, 252; /* RGB values for #A5F3FC */
+  --color2: 34, 211, 238;  /* RGB values for #22D3EE */
+  --color3: 165, 243, 252; /* RGB values for #A5F3FC */
+
   content: "";
   position: absolute;
   inset: 0;
@@ -285,12 +289,12 @@ h1 {
   /* luminous sweep */
   background: linear-gradient(
     75deg,
-    rgba(165,243,252,0) 20%,     /* #A5F3FC transparent */
-    rgba(34,211,238,0.70) 45%,   /* #22D3EE bright center */
-    rgba(165,243,252,0) 70%
+    rgba(var(--color1), 0) 20%,     /* #A5F3FC transparent */
+    rgba(var(--color2), 0.70) 45%,   /* #22D3EE bright center */
+    rgba(var(--color3), 0) 70%
   );
   background-size: 200% 100%;
-  transform: translateX(-120%) rotate(0.001deg);
+  /* transform: translateX(-120%) rotate(0.001deg); */
   animation: shimmer 2.4s ease-in-out infinite;
   mix-blend-mode: screen;
 
@@ -306,9 +310,20 @@ h1 {
 }
 
 @keyframes shimmer {
-  to { transform: translateX(120%) rotate(0.001deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .shimmer-mask::after { animation: none; }
+  0%, 100% {
+    --color1: 165, 243, 252;
+    --color2: 34, 211, 238;
+  }
+  25% {
+    --color1: 252, 165, 165; /* Reddish */
+    --color2: 238, 34, 34;
+  }
+  50% {
+    --color1: 165, 252, 165; /* Greenish */
+    --color2: 34, 238, 34;
+  }
+  75% {
+    --color1: 252, 252, 165; /* Yellowish */
+    --color2: 238, 238, 34;
+  }
 }
