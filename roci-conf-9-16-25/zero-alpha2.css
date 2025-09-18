@@ -75,6 +75,11 @@ pre {
   width: 500px;
 }
 
+.legacy-mutator-flow {
+  width: 500px;
+  margin-top: 64px;
+}
+
 .synced-query-flow {
   width: 800px;
   margin-top: 64px;
@@ -178,10 +183,25 @@ img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
   height: 120px;
 }
 
+.mascot-xs {
+  /* display: none; */
+  height: 100px;
+}
+
+.flip-x {
+  transform: scaleX(-1);
+}
+
 .bottom-left {
   position: absolute;
   bottom: 32px;
   left: 64px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 32px;
+  right: 84px;
 }
 
 .center {

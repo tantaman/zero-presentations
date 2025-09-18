@@ -13,17 +13,19 @@ theme: "zero-alpha2"
 
 # Legacy Mutators
 
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+<img src="./legacy-mutator-flow.png" class="legacy-mutator-flow center" />
+
+<img src="./cowscot.png" class="mascot-sm bottom-left" />
 
 ---
 
 # Custom Mutators
 
-- Parallel to Synced Queries
-- Semantic mutations
-- `[name, args]` sent to server instead of C~~R~~UD
+- Set of mutations is pre-defined
+- `[mutation name, args]` sent to server instead of C~~R~~UD
+- Enables server authoritative writes via custom impl of mutator on the server
 
-<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
+<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left flip-x" />
 
 ---
 
@@ -75,12 +77,20 @@ useQuery(z.query.todo.where(
 - Client and server query implementations have to match
 - No room for custom code on the read path
 
+```ts
+/*❌ qod*/ z.query.todo.related('collaborators').related('lists').related('collaborators').related('lists')...
+/*❌ jwt lock-in*/ type ZeroOptions = { auth: JWT, ... };
+/*❌ read diff field?*/ todo.where('listId', ?) /*vs*/ todo.where('collectionId', ?)
+/*❌ custom code*/ todo.where('foo', await sql`...`)
+```
+
 <img src="./mascot-running.png" class="mascot-sm bottom-left" />
 
 ---
 
 # Synced Queries
 
+- Parallel of Custom Mutators
 - Locks down the server
 - Custom code on read path
 - Custom authorization
@@ -222,62 +232,91 @@ const todoList = syncedQuery(
 
 ---
 
-# Reviving Ad-Hoc Queries
+# Example: Ad-Hoc Queries
 
-Building today's queries on top of synced queries. Key idea: `AST` can be the argument to a synced query.
-
-- exposing how zero works, more primitives
+Synced queries are the more primitive building block.
 
 ```ts
-// client.s
-
-
-// server.ts
 const adHoc = syncedQuery(
   'adHoc',
   astSchema,
-  ({ast}) => ast,
-  // Note: could inject RLS rules by walking the AST
+  (ast) => queryFromAst(ast),
 );
 
 // usage:
-useQuery(adHoc(builder.todo.where('listId', id)))
+useQuery(adHoc(builder.todo.where('listId', id).ast))
 ```
 
 
 <div class="note">⚠️ Notional example</div>
 
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left flip-x" />
 
 ---
 
-# Reviving RLS
+# Example: RLS
 
-todo
+```ts
+// server.ts
+const someQuery = syncedQuery(
+  'someQuery',
+  (args) => {
+    let ast = builder.foo.related('bar').related('baz').ast;
+    ast = spliceInRules(ast, permissionsByTable);
+    return queryFromAst(ast);
+  }
+)
+```
 
-<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
+<img src="./mascot-shooting-r.png" class="mascot-sm bottom-left" />
 
 ---
 
 # Local Only
 
-- lead in, we store rows
-- can do a local only query over those rows
+- Bare / unnamed queries will likely become "local only"
+- Local-only queries are possible due to Zero's model of syncing rows
 
-todo
+```ts
+// example: load all issues via synced query
+const allIssues = syncedQuery('allIssues', () => builder.issues.related('owner').related('creator').related('labels'));
+z.preload(
+  allIssues()
+);
 
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+// then query however you want, strictly locally
+z.query.issues.where('ownerId', 1);
+```
+
+- Why? A way to manage server load
+
+<img src="./mascot-crouch.png" class="mascot-xs flip-x bottom-left" />
 
 ---
 
 # Local Modifications to Synced Queries
 
-todo
+```ts
+const allLabels = syncedQuery(
+  'labels',
+  (id) => builder.labels
+);
+
+// ...
+
+function labelEditor() {
+  const label = useQuery(allLabels())
+    .where('name', 'foo');
+
+  return <div>{label.nameSpace} | {label.name} | {label.color}</div>;
+}
+```
+
+- Local-only variant "pinned" to server side variant
 
 ---
 
-# Custom Mutator + Synced Queries
-# = Cookie/Any Auth[n/z]
+# Custom Mutator + Synced Queries = Auth[n/z]
 
 - todo: data flow
 - conclusion: no mutation or read till check with api server, auth can be delegated. Even can use http-only cookies.
