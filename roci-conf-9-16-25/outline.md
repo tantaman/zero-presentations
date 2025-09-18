@@ -43,7 +43,7 @@ useQuery(z.query.todo.where(
   </div>
 </div>
 
-<img src="legacy-query-flow.png" class="legacy-query-flow center" />
+<img src="legacy-query-flow2.png" class="legacy-query-flow center" />
 
 <img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
 
@@ -81,7 +81,7 @@ useQuery(z.query.todo.where(
 
 # Synced Query
 
-<img src="synced-query-flow.png" class="synced-query-flow center" />
+<img src="synced-query-flow2.png" class="synced-query-flow center" />
 
 <img src="./mascot-jumping.png" class="mascot-sm bottom-left" />
 
@@ -117,7 +117,7 @@ useQuery(todoList);
 
 # Synced Query (Divergent 1)
 
-Only check permissions on the server. Prevents needing to sync permission related data.
+Only check permissions on the server.
 
 <div class="two-col">
   <div class="col">
@@ -212,11 +212,15 @@ const todoList = syncedQuery(
 
 ---
 
-# Synced Queries (Divergent 3)
+# Local Only
 
 - Perf, over-sync, whatev
 
 <img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
+---
+
+# Pinned Local Only
 
 ---
 
@@ -269,27 +273,14 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 
 ---
 
-
 # Custom Mutator + Synced Queries
 # = Cookie/Any Auth[n/z]
 
-todo: code example
+- flow
+- conclusion: no mutation or read till check with api server, auth can be delegated. Even can use http-only cookies.
 
 <img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
 
 ---
 
-# Why?
-
-todo: questions we asked ourselves
-- How to use POLAR, Google RBAC thing
-  - External systems
-- HTTP session cookies
-- Lock down server
-
-
-- Ad-hoc
-- Local-only
-- no more permissions system
-- fewer concepts?
-- no more
+# Questions?
