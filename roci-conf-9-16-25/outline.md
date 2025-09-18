@@ -5,7 +5,7 @@ paginate: true
 theme: "zero-alpha2"
 ---
 
-<span class="title">Zero</span>
+<span class="title">ZERO</span>
 
 # Synced Queries & Custom Mutators
 
@@ -43,7 +43,7 @@ useQuery(z.query.todo.where(
   </div>
 </div>
 
-<img src="legacy-query-flow2.png" class="legacy-query-flow center" />
+<img src="legacy-query-flow3.png" class="legacy-query-flow center" />
 
 <img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
 
@@ -68,13 +68,10 @@ useQuery(z.query.todo.where(
 
 # Synced Queries
 
-- Advantages
-  - Locks down the server
-  - Custom code on read path
-  - Custom authorization
-  - Allows divergent or shared implementations on client and server
-- Disadvantages
-  - More complex deployment
+- Locks down the server
+- Custom code on read path
+- Custom authorization
+- Allows divergent or shared implementations on client and server
 
 ---
 
@@ -82,7 +79,7 @@ useQuery(z.query.todo.where(
 
 - `[name, args]` pair sent to zero-cache instead of an AST
 
-<img src="synced-query-flow2.png" class="synced-query-flow center" />
+<img src="synced-query-flow3.png" class="synced-query-flow center" />
 
 <img src="./mascot-jumping.png" class="mascot-sm bottom-left" />
 
@@ -193,15 +190,12 @@ const todoList = syncedQuery(
     const user = await db.query.users.findFirst({
       where: eq(users.id, context.userId),
     });
-
     // call Polar or some 3rd party authz service
     const allowed = await checkListAccess(
       user,
       id,
     );
-
-    // share code / call into client impl
-    const q = clientTodoList({id});
+    const q = clientTodoList({id}); // share / call into client impl
     return allowed ? q : q.where(alwaysFalse);
   }
 );
