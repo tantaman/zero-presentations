@@ -312,7 +312,7 @@ function labelEditor() {
 
 ---
 
-# Example: Impl RLS
+# Example: RLS
 
 ```ts
 // server.ts
