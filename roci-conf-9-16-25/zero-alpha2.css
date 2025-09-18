@@ -10,8 +10,8 @@
 
 :root {
   /* Brand tokens */
-  --bg: #000;         /* page background */
-  --ink: #fff;        /* headings */
+  --bg: #111;         /* page background */
+  --ink: #eee;        /* headings */
   --panel: #1e293b;      /* card surface */
   --ghost: #334155;      /* subtle panels */
   --text: #e2e8f0;       /* body text */
@@ -122,7 +122,7 @@ li::before {
 /* Generic mascot class for explicit usage */
 .mascot { 
   width: clamp(260px, 26vw, 380px); height: auto; object-fit: contain;
-  display: none;
+  /* display: none; */
 }
 
 /* Logo: cap size wherever it appears */
@@ -174,7 +174,7 @@ img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
 }
 
 .mascot-sm {
-  display: none;
+  /* display: none; */
   height: 120px;
 }
 
@@ -215,7 +215,7 @@ h1 {
 }
 
 .shimmer-mask {
-  display: none;
+  /* display: none; */
   /* size to your image (or set fixed width/height) */
   width: 377px;    /* example: the PNG’s width */
   height: 365px;   /* example: the PNG’s height */

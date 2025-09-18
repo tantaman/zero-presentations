@@ -9,8 +9,21 @@ theme: "zero-alpha2"
 
 # Synced Queries & Custom Mutators
 
-<div class="shimmer-mask center"></div>
-<!-- <img src="./mascot-jumping.png" class="mascot center" /> -->
+---
+
+# Legacy Mutators
+
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
+---
+
+# Custom Mutators
+
+- Parallel to Synced Queries
+- Semantic mutations
+- `[name, args]` sent to server instead of C~~R~~UD
+
+<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
 
 ---
 
@@ -45,13 +58,13 @@ useQuery(z.query.todo.where(
 
 <img src="legacy-query-flow3.png" class="legacy-query-flow center" />
 
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+<img src="./mascot-shooting-r.png" class="mascot-sm bottom-left" />
 
 ---
 
 # Problems?
 
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+<img src="./mascot-blocking.png" class="mascot-sm bottom-left" />
 
 ---
 
@@ -62,7 +75,7 @@ useQuery(z.query.todo.where(
 - Client and server query implementations have to match
 - No room for custom code on the read path
 
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+<img src="./mascot-running.png" class="mascot-sm bottom-left" />
 
 ---
 
@@ -72,6 +85,8 @@ useQuery(z.query.todo.where(
 - Custom code on read path
 - Custom authorization
 - Allows divergent or shared implementations on client and server
+
+<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
 
 ---
 
@@ -207,23 +222,6 @@ const todoList = syncedQuery(
 
 ---
 
-# Local Only
-
-- lead in, we store rows
-- can do a local only query over those rows
-
-todo
-
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
-
----
-
-# Local Modifications to Synced Queries
-
-todo
-
----
-
 # Reviving Ad-Hoc Queries
 
 Building today's queries on top of synced queries. Key idea: `AST` can be the argument to a synced query.
@@ -261,14 +259,20 @@ todo
 
 ---
 
-# Custom Mutators
+# Local Only
 
-- Parallel to Synced Queries
-- Semantic mutations
-- `[name, args]` sent to server instead of C~~R~~UD
-- Similar benefits but on write
+- lead in, we store rows
+- can do a local only query over those rows
+
+todo
 
 <img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
+
+---
+
+# Local Modifications to Synced Queries
+
+todo
 
 ---
 
