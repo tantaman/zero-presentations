@@ -57,29 +57,30 @@ useQuery(z.query.todo.where(
 
 # Problems?
 
-- Client could craft arbitrary ASTs or QODs (.related().related().related().related...)
+- Client could craft arbitrary ASTs or QODs (.related().related().related().related()...)
 - Zero-Cache must authenticate and authorize users
-- Client and server queries implementations have to match
-- No room for your code on the read path
+- Client and server query implementations have to match
+- No room for custom code on the read path
 
 <img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
 
 ---
 
-# Synced Query
+# Synced Queries
 
-- `[name, args]` tuple sent to server instead of an AST
 - Advantages
   - Locks down the server
   - Custom code on read path
   - Custom authorization
-  - Divergent implementations on client and server
+  - Allows divergent or shared implementations on client and server
 - Disadvantages
   - More complex deployment
 
 ---
 
 # Synced Query
+
+- `[name, args]` pair sent to zero-cache instead of an AST
 
 <img src="synced-query-flow2.png" class="synced-query-flow center" />
 
@@ -214,31 +215,41 @@ const todoList = syncedQuery(
 
 # Local Only
 
-- Perf, over-sync, whatev
+- lead in, we store rows
+- can do a local only query over those rows
+
+todo
 
 <img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
 
 ---
 
-# Pinned Local Only
+# Local Modifications to Synced Queries
+
+todo
 
 ---
 
 # Reviving Ad-Hoc Queries
 
-Synced queries, a more powerful primitive than today's queries.
+Building today's queries on top of synced queries. Key idea: `AST` can be the argument to a synced query.
+
+- exposing how zero works, more primitives
 
 ```ts
-// Gist: AST is the arg to the query
+// client.s
+
+
+// server.ts
 const adHoc = syncedQuery(
   'adHoc',
   astSchema,
-  ({ast}) => newQueryFromAst(ast), // coming soon
+  ({ast}) => ast,
   // Note: could inject RLS rules by walking the AST
 );
 
 // usage:
-useQuery(adHoc(builder.todo.where('listId', id).ast))
+useQuery(adHoc(builder.todo.where('listId', id)))
 ```
 
 
@@ -249,6 +260,8 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 ---
 
 # Reviving RLS
+
+todo
 
 <img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
 
@@ -265,19 +278,14 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 
 ---
 
-# Custom Mutator Flow
-
-(crud flow, custom flow)
-
-<img src="./mascot-waiting.png" class="mascot-sm bottom-left" />
-
----
-
 # Custom Mutator + Synced Queries
 # = Cookie/Any Auth[n/z]
 
-- flow
+- todo: data flow
 - conclusion: no mutation or read till check with api server, auth can be delegated. Even can use http-only cookies.
+- delete deploy permissions
+- delete rls
+- first
 
 <img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
 
