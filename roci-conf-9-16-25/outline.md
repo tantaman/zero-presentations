@@ -106,7 +106,7 @@ useQuery(z.query.todo.where(
 
 <img src="synced-query-flow3.png" class="synced-query-flow center" />
 
-<img src="./mascot-jumping.png" class="mascot-sm bottom-left" />
+<img src="./mascot-jumping.png" class="mascot-sm bottom-left flip-x" />
 
 ---
 
@@ -337,10 +337,10 @@ function spliceInRules(ast, permissionsByTable) {
 }
 ```
 
-<img src="./mascot-shooting-r.png" class="mascot-sm bottom-left" />
+<img src="./mascot-prone.png" class="mascot-sm bottom-left" />
 
 ---
 
-# Thanks
+# Fin
 
 <img src="./bye.png" class="bye center" />
