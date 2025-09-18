@@ -61,7 +61,8 @@ p  { color: var(--muted); font-size: 1.15em; }
  ********************/
 pre {
   /* background: linear-gradient(180deg, var(--panel), var(--ghost)); */
-  background: #101010;
+  background: rgba(255,255,255,.03);
+  /* border: 1px solid rgba(255,255,255,.08); */
   border: 1px solid rgba(255,255,255,.08);
   border-radius: var(--radius);
   box-shadow: 0 20px 60px rgba(0,0,0,.4);
@@ -96,8 +97,8 @@ li {
 li::before {
   content: "";
   display: inline-block;
-  width: 1em;
-  height: 1em;
+  width: 0.7em;
+  height: 0.7em;
   margin-right: .6em;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, #a5f3fc 0%, #22d3ee 40%, #0ea5e9 70%, #0284c7 100%);
@@ -105,7 +106,7 @@ li::before {
     0 0 6px rgba(34, 211, 238, 0.9),
     0 0 16px rgba(34, 211, 238, 0.7),
     0 0 32px rgba(34, 211, 238, 0.5);
-  vertical-align: -2px;
+  vertical-align: 0px;
   animation: blaster-pulse 1.6s infinite ease-in-out;
 }
 
