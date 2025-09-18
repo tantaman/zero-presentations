@@ -183,6 +183,15 @@ img.logo { height: clamp(24px, 3.2vh, 36px); width: auto; object-fit: contain; }
   height: 120px;
 }
 
+.rm-perms {
+  height: 500px;
+}
+
+.bye {
+  height: 300px;
+  margin-top: 64px;
+}
+
 .mascot-xs {
   /* display: none; */
   height: 100px;

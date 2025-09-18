@@ -254,24 +254,6 @@ useQuery(adHoc(builder.todo.where('listId', id).ast))
 
 ---
 
-# Example: RLS
-
-```ts
-// server.ts
-const someQuery = syncedQuery(
-  'someQuery',
-  (args) => {
-    let ast = builder.foo.related('bar').related('baz').ast;
-    ast = spliceInRules(ast, permissionsByTable);
-    return queryFromAst(ast);
-  }
-)
-```
-
-<img src="./mascot-shooting-r.png" class="mascot-sm bottom-left" />
-
----
-
 # Local Only
 
 - Bare / unnamed queries will likely become "local only"
@@ -314,18 +296,51 @@ function labelEditor() {
 
 - Local-only variant "pinned" to server side variant
 
----
-
-# Custom Mutator + Synced Queries = Auth[n/z]
-
-- todo: data flow
-- conclusion: no mutation or read till check with api server, auth can be delegated. Even can use http-only cookies.
-- delete deploy permissions
-- delete rls
-- first
-
-<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left" />
+<img src="./cowscot.png" class="mascot-sm bottom-left" />
 
 ---
 
-# Questions?
+# Custom Mutator + Synced Queries = Any Auth[n/z]
+
+- No mutation or read till checking with the api server
+- No more "deploy permissions" script
+- No more custom permission system
+
+<img src="./rm-perms.png" class="rm-perms center" />
+
+<img src="./mascot-shooting-l.png" class="mascot-sm bottom-left flip-x" />
+
+---
+
+# Example: Impl RLS
+
+```ts
+// server.ts
+const someQuery = syncedQuery(
+  'someQuery',
+  (args) => {
+    let ast = builder.foo.related('bar').related('baz').ast;
+    ast = spliceInRules(ast, permissionsByTable);
+    return queryFromAst(ast);
+  }
+);
+
+function spliceInRules(ast, permissionsByTable) {
+  if (ast.where) {
+    return {
+      ...ast,
+      where: [...ast.where, permissionsByTable[ast.table]],
+      related: spliceInRules(ast, permissionsByTable),
+    };
+  }
+  return ast;
+}
+```
+
+<img src="./mascot-shooting-r.png" class="mascot-sm bottom-left" />
+
+---
+
+# Thanks
+
+<img src="./bye.png" class="bye center" />
